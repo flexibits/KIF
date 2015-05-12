@@ -127,20 +127,22 @@
 
 - (void)testButtonAbsentAfterRemoveFromSuperview
 {
-    UIView *view = [tester waitForViewWithAccessibilityLabel:@"Button"];
-    
-    [view removeFromSuperview];
+    [tester waitForViewWithAccessibilityLabel:@"Button"];
+    UIAccessibilityElement *element = [[UIApplication sharedApplication] accessibilityElementWithLabel:@"Button" accessibilityValue:nil traits:0];
+
+    [[(id)element view] removeFromSuperview];
     [tester waitForAbsenceOfViewWithAccessibilityLabel:@"Button"];
 }
 
 - (void)testButtonAbsentAfterSetHidden
 {
-    UIView *view = [tester waitForViewWithAccessibilityLabel:@"Button"];
-    
-    [view setHidden:YES];
+    [tester waitForViewWithAccessibilityLabel:@"Button"];
+    UIAccessibilityElement *element = [[UIApplication sharedApplication] accessibilityElementWithLabel:@"Button" accessibilityValue:nil traits:0];
+
+    [[(id)element view] setHidden:YES];
     [tester waitForAbsenceOfViewWithAccessibilityLabel:@"Button"];
 
-    [view setHidden:NO];
+    [[(id)element view] setHidden:NO];
     [tester waitForViewWithAccessibilityLabel:@"Button"];
 }
 
